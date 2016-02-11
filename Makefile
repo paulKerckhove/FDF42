@@ -6,11 +6,11 @@
 #    By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/11 11:40:18 by pkerckho          #+#    #+#              #
-#    Updated: 2016/02/11 11:48:33 by pkerckho         ###   ########.fr        #
+#    Updated: 2016/02/11 15:38:23 by pkerckho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FLAG = -Wall -Wetra - Werror
+FLAG = -Wall -Wextra -Werror
 
 NAME = fdf
 
@@ -22,7 +22,7 @@ all: $(NAME)
 
 $(NAME):
 	@make -C libft re
-	@gcc $(FLAG) -o $(NAME) $(SRC) -lmlx -framework OpenGL - framework AppKit
+	@gcc $(FLAG) -o $(NAME) $(SRC) -lmlx -framework OpenGL -framework AppKit libft/libft.a
 	@echo "$(NAME) created"
 
 clean:

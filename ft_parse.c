@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:27:10 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/12 13:36:55 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/15 11:07:29 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,13 @@ void		ft_parse2(t_env *e, char *file)
 ** we use (ft_putendl) to print it to check.
 */
 
-void		ft_parse(t_env *e, char *file, int argc)
+void		ft_parse(t_env *e, char *file)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 0;
 	j = -1;
-	if (argc != 2)
-		ft_error("wrong number of arguments");
 	if ((e->fd = open(file, O_RDONLY)) <= 0)
 		ft_error("the open has failed");
 	ft_parse2(e, file);

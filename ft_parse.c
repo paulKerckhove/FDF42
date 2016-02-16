@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:27:10 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/15 18:20:23 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/16 12:26:23 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,15 @@ void	ft_freeparse2(t_env *e)
 	}
 }
 
+/*
+** The parse function is used to to get through our file (array) line by line.
+** In the parse2 we manage to get the lenght of our colomns and our lines. Once
+** it's done we close our file then re open it to start from the top of our
+** array. We then use the ft_split function to get rid of all the spaces, line
+** by line. Then we apply the ft_atoi function that converts chars into ints on
+** each tile of our array.
+*/
+
 void		ft_parse(t_env *e, char *file)
 {
 	size_t		nmbr_col;
@@ -90,21 +99,21 @@ void		ft_parse(t_env *e, char *file)
 		if (nmbr_col != e->cnt_col)
 			ft_error("invalid map");
 	}
-
-	int		x;
-	int		y;
-
-	y = 0;
-	while (y < e->cnt_line)
-	{
-		x = 0;
-		while (x < e->cnt_col)
-		{
-			ft_putnbr(e->tab[y][x]);
-			ft_putchar(' ');
-			++x;
-		}
-		ft_putchar('\n');
-		++y;
-	}
 }
+	/*
+	   int		x;
+	   int		y;
+
+	   y = 0;
+	   while (y < e->cnt_line)
+	   {
+	   x = 0;
+	   while (x < e->cnt_col)
+	   {
+	   ft_putnbr(e->tab[y][x]);
+	   ft_putchar(' ');
+	   ++x;
+	   }
+	   ft_putchar('\n');
+	   ++y;
+	   } */

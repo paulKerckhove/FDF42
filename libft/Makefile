@@ -6,7 +6,7 @@
 #    By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/25 11:24:57 by pkerckho          #+#    #+#              #
-#    Updated: 2016/02/08 15:58:42 by pkerckho         ###   ########.fr        #
+#    Updated: 2016/02/17 16:42:46 by pkerckho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,8 @@ SRC = ft_atoi.c \
 	  ft_swap.c \
 	  ft_wordcount.c \
 	  ft_strnjoin.c \
-	  ft_get_next_line.c
+	  ft_get_next_line.c \
+	  ft_error.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 11:24:48 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/08 16:08:16 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/17 16:41:44 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ int					ft_wordcount(char const *s, char c);
 void				ft_swap(int *a, int *b);
 char				*ft_strndup(const char *s1, size_t n);
 char				*ft_strnjoin(char const *s1, char const *s2, size_t len);
-int					ft_get_next_line(int const fd, char **line);
+int					get_next_line(int const fd, char **line);
+void				ft_error(char *error);
 #endif

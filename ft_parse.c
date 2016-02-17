@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:27:10 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/16 17:36:16 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/17 16:41:46 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ void		ft_parse2(t_env *e, char *file)
 	ft_split_line(e);
 	while (e->line[e->cnt_col])
 		++e->cnt_col;
-	while (e->cnt_line-- > 0)
-		e->tab[e->cnt_line] = (int *)ft_memalloc(sizeof(int *) * e->cnt_col);
+	while (e->cnt_line  > 0)
+	{
+		e->tab[e->cnt_line - 1] = (int*)ft_memalloc(sizeof(int*) * e->cnt_col);
+		--e->cnt_line;
+	}
 }
 
 void	ft_freeparse2(t_env *e)
@@ -60,7 +63,7 @@ void	ft_freeparse2(t_env *e)
 	while (e->line[i])
 	{
 		ft_strdel(&e->line[i]);
-		i++;
+		++i;
 	}
 }
 
@@ -75,7 +78,7 @@ void	ft_freeparse2(t_env *e)
 
 void		ft_parse(t_env *e, char *file)
 {
-	size_t		nmbr_col;
+	size_t	nmbr_col;
 
 	nmbr_col = 0;
 	if ((e->fd = open(file, O_RDONLY)) <= 0)
@@ -86,16 +89,13 @@ void		ft_parse(t_env *e, char *file)
 		e->tab[0][nmbr_col] = ft_atoi(e->line[nmbr_col]);
 		++nmbr_col;
 	}
-	ft_parse2(e, file);
+	ft_freeparse2(e);
 	while (ft_split_line(e) == 1)
 	{
 		++e->cnt_line;
-		nmbr_col = 0;
-		while (e->line[nmbr_col])
-		{
+		nmbr_col = -1;
+		while (e->line[++nmbr_col])
 			e->tab[e->cnt_line][nmbr_col] = ft_atoi(e->line[nmbr_col]);
-			++nmbr_col;
-		}
 		if (nmbr_col != e->cnt_col)
 			ft_error("invalid map");
 	}

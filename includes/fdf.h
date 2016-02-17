@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 14:31:15 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/15 18:17:06 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/17 16:37:53 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ typedef struct				s_env
 {
 	int						fd;
 	char					**line;
-	int						x;
-	int						y;
+	size_t						x;
+	size_t						y;
 	int						color;
 	void					*mlx;
 	void					*win;
-	size_t					cnt_col;
-	size_t					cnt_line;
+	size_t						cnt_col;
+	size_t						cnt_line;
 	int						**tab;
 }							t_env;
 

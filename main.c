@@ -6,27 +6,32 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 14:04:26 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/18 18:10:27 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/22 17:17:03 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 void		ft_iso(size_t x, size_t y, t_env *e)
 {
-	int		prime_x;
-	int		prime_y;
-
 	e->x = y * 20 + x * 20 + (WIN_X / 5 * 2);
 	e->y = x * 20 + x * 20 + (WIN_Y / 5 * 2);
 
-	if (y == 0)
-		prime_y = e->y;
 	if (x == 0)
-		prime_x = e->x;
-	prime_x = e->y;
-	prime_y = e->x;
+	{
+		e->y_prev = e->y;
+		e->x_prev = e->x;
+	}
+	ft_draw(e->x, e->y, e);
+	if (y > 0)
+	{
+		e->x_prev = (y - 1) * 20 + x * 20 + (WIN_X / 5 * 2);
+		e->y_prev = (y - 1) * 20 - x * 20 - e->tab[y - 1][x]
+			+ (WIN_Y / 5 * 2);
+		ft_draw(e->x, e->y, e);
+	}
+	e->y_prev = e->y;
+	e->x_prev = e->x;
 }
 
 void		ft_print(t_env *e)
@@ -41,7 +46,6 @@ void		ft_print(t_env *e)
 		while (x < e->cnt_col)
 		{
 			ft_iso(x, y, e);
-			mlx_pixel_put(e->mlx, e->win, e->x, e->y, e->color);
 			++x;
 		}
 		++y;

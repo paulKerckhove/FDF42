@@ -6,7 +6,7 @@
 #    By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/11 11:40:18 by pkerckho          #+#    #+#              #
-#    Updated: 2016/02/15 16:14:03 by pkerckho         ###   ########.fr        #
+#    Updated: 2016/02/22 17:18:28 by pkerckho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ INC_DIR = includes
 INCL = libft/includes/libft.h
 
 SRC = main.c \
-	  ft_parse.c
+	  ft_parse.c \
+	  ft_draw.c
 
 LIB = libft/libft.a
 

@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:27:10 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/18 11:57:12 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/23 11:53:01 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,14 @@ void		ft_parse2(t_env *e, char *file)
 		free(line);
 	}
 	if (e->cnt_line == 0 || len == 0)
-		ft_error("read has failed");
+		ft_error("the read has failed");
 	e->tab = (int **)ft_memalloc(sizeof(int *) * e->cnt_line);
 	close(e->fd);
 	e->fd = open(file, O_RDONLY);
 	ft_split_line(e);
 	while (e->line[e->cnt_col])
 		++e->cnt_col;
+	e->height_max = ft_atoi(e->line[0]);
 	while (e->cnt_line  > 0)
 	{
 		e->tab[e->cnt_line - 1] = (int*)ft_memalloc(sizeof(int*) * e->cnt_col);
@@ -65,6 +66,7 @@ void	ft_freeparse2(t_env *e)
 		ft_strdel(&e->line[i]);
 		++i;
 	}
+	free(e->line);
 }
 
 /*
@@ -95,7 +97,11 @@ void		ft_parse(t_env *e, char *file)
 		++e->cnt_line;
 		nmbr_col = -1;
 		while (e->line[++nmbr_col])
+		{
 			e->tab[e->cnt_line][nmbr_col] = ft_atoi(e->line[nmbr_col]);
+			if (e->tab[e->cnt_line][nmbr_col] > e->height_max)
+				e->height_max = e->tab[e->cnt_line][nmbr_col];
+		}
 		if (nmbr_col != e->cnt_col)
 			ft_error("invalid map");
 	}

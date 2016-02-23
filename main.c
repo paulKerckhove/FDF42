@@ -6,17 +6,31 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 14:04:26 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/22 17:17:03 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/23 18:48:31 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+void		ft_drawsettings(t_env *e)
+{
+	e->color = 0x3366ff;
+	e->lr = 0;
+	e->ud = 0;
+	e->contrast = 0;
+	e->height = 1;
+	e->zoom = 1;
+}
+
+/* The height_max is counted from the start by checking the highest value in
+** the array  This gives us the max hight of 'z'.
+*/
 void		ft_iso(size_t x, size_t y, t_env *e)
 {
-	e->x = y * 20 + x * 20 + (WIN_X / 5 * 2);
-	e->y = x * 20 + x * 20 + (WIN_Y / 5 * 2);
-
+	e->x = (WIN_X * 2 / 5) + y * e->zoom + x * e->zoom + e->lr;
+	e->y = (WIN_Y / 5 * 2) + y * e->zoom - x * e->zoom - e->tab[y][x]
+		* e->height + e->ud;
+	 e->color = e->tab[y][x] * 0x3366ff / e->height_max + e->contrast;
 	if (x == 0)
 	{
 		e->y_prev = e->y;
@@ -25,9 +39,10 @@ void		ft_iso(size_t x, size_t y, t_env *e)
 	ft_draw(e->x, e->y, e);
 	if (y > 0)
 	{
-		e->x_prev = (y - 1) * 20 + x * 20 + (WIN_X / 5 * 2);
-		e->y_prev = (y - 1) * 20 - x * 20 - e->tab[y - 1][x]
-			+ (WIN_Y / 5 * 2);
+		e->x_prev = (WIN_X / 5 * 2) + (y - 1) * e->zoom + x * e->zoom + e->lr;
+		e->y_prev = (WIN_Y / 5 * 2) + (y - 1) * e->zoom - x * e->zoom
+			- e->tab[y - 1][x] * e->height + e->ud;
+		e->color = e->tab[y][x] * 0x3366ff / e->height_max + e->contrast;
 		ft_draw(e->x, e->y, e);
 	}
 	e->y_prev = e->y;
@@ -52,10 +67,30 @@ void		ft_print(t_env *e)
 	}
 }
 
-int		ft_keyfunct(int keycode)
+int		ft_key_settings(int keycode, t_env *e)
 {
-	if (keycode == 53)
+	if (keycode == ESC)
 		exit(0);
+	if (keycode == STAR)
+		ft_drawsettings(e);
+	if (keycode == KEY_PLUS)
+		e->zoom += 1;
+	if (keycode == KEY_MINUS)
+		e->zoom -= 1;
+	if (keycode == KEY_RIGHT)
+		e->lr += 10;
+	if (keycode == KEY_LEFT)
+		e->lr -= 10;
+	if (keycode == KEY_UP)
+		e->ud -= 10;
+	if (keycode == KEY_DOWN)
+		e->ud += 10;
+	if (keycode == PAGE_UP && e->color != 0xFFFFFF)
+		e->contrast += 0x123456;
+	if (keycode == PAGE_DOWN && e->color >= 0x111111)
+		e->contrast -= 0x123456;
+	mlx_clear_window(e->mlx, e->win);
+	ft_print(e);
 	return (0);
 }
 
@@ -66,12 +101,12 @@ int		main(int argc, char **argv)
 	if (argc != 2)
 		ft_error("wrong number of arguments");
 	ft_parse(&e, argv[1]);
-	e.color = 0x0099FF;
-	e.y = WIN_Y / 4;
+	ft_drawsettings(&e);
+	ft_settings();
 	e.mlx = mlx_init();
 	e.win = mlx_new_window(e.mlx, WIN_X, WIN_Y, "mlx42");
 	ft_print(&e);
-	mlx_key_hook(e.win, ft_keyfunct, &e);
+	mlx_key_hook(e.win, ft_key_settings, &e);
 	mlx_loop(e.mlx);
 	return (0);
 }

@@ -6,15 +6,26 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 14:31:15 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/22 16:51:33 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/23 14:18:41 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# define WIN_X 1600
-# define WIN_Y 1200
+# define WIN_X 1920
+# define WIN_Y 1080
+
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_PLUS 69
+# define KEY_MINUS 78
+# define PAGE_UP 116
+# define PAGE_DOWN 121
+# define STAR 67
+# define ESC 53
 
 # include "../libft/includes/libft.h"
 # include "../minilibx/mlx.h"
@@ -43,6 +54,12 @@ typedef struct				s_env
 	int						sy;
 	int						tmpx;
 	int						tmpy;
+	int						zoom;
+	int						lr;
+	int						ud;
+	int						height;
+	int						height_max;
+	int						contrast;
 }							t_env;
 
 void						ft_parse(t_env *e, char *file);
@@ -50,5 +67,7 @@ int							ft_split_line(t_env *e);
 void						ft_parse2(t_env *e, char *file);
 void						ft_freeparse2(t_env *e);
 void						ft_draw(int x2, int y2, t_env *e);
-
+void						ft_settings(void);
+void						ft_create_color(int *colors);
+void						ft_color(void);
 #endif

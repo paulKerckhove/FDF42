@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 14:31:15 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/23 14:18:41 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/24 10:56:13 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FDF_H
 
 # define WIN_X 1920
-# define WIN_Y 1080
+# define WIN_Y 1200
 
 # define KEY_UP 126
 # define KEY_DOWN 125
@@ -26,6 +26,11 @@
 # define PAGE_DOWN 121
 # define STAR 67
 # define ESC 53
+
+# define KEYPRESS 2
+# define KEYRELEASE 3
+# define KEYPRESSMASK (1L<<0)
+# define KEYRELEASEMASK (1L<<1)
 
 # include "../libft/includes/libft.h"
 # include "../minilibx/mlx.h"

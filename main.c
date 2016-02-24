@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 14:04:26 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/23 18:48:31 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/24 16:15:54 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,18 @@ int		main(int argc, char **argv)
 {
 	t_env	e;
 
-	if (argc != 2)
-		ft_error("wrong number of arguments");
-	ft_parse(&e, argv[1]);
-	ft_drawsettings(&e);
-	ft_settings();
-	e.mlx = mlx_init();
-	e.win = mlx_new_window(e.mlx, WIN_X, WIN_Y, "mlx42");
-	ft_print(&e);
-	mlx_key_hook(e.win, ft_key_settings, &e);
-	mlx_loop(e.mlx);
+	if (argc == 2)
+	{
+		ft_parse(&e, argv[1]);
+		ft_drawsettings(&e);
+		ft_settings();
+		e.mlx = mlx_init();
+		e.win = mlx_new_window(e.mlx, WIN_X, WIN_Y, "mlx42");
+		ft_print(&e);
+		mlx_hook(e.win, KEYPRESS, KEYPRESSMASK, ft_key_settings, &e);
+		mlx_loop(e.mlx);
+	}
+	else
+		ft_error("error : invalid number of arguments");
 	return (0);
 }

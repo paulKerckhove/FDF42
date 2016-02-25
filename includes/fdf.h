@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 14:31:15 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/24 10:56:13 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/25 16:59:04 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define WIN_X 1920
 # define WIN_Y 1200
+
+# define WELCOME "Welcome to FDF by pkerckho"
 
 # define KEY_UP 126
 # define KEY_DOWN 125
@@ -26,6 +28,8 @@
 # define PAGE_DOWN 121
 # define STAR 67
 # define ESC 53
+# define SLASH 75
+# define EQUAL 81
 
 # define KEYPRESS 2
 # define KEYRELEASE 3

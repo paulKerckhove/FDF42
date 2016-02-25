@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 14:04:26 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/24 16:15:54 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/25 17:00:45 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,12 @@ void		ft_drawsettings(t_env *e)
 	e->zoom = 1;
 }
 
-/* The height_max is counted from the start by checking the highest value in
-** the array  This gives us the max hight of 'z'.
-*/
 void		ft_iso(size_t x, size_t y, t_env *e)
 {
-	e->x = (WIN_X * 2 / 5) + y * e->zoom + x * e->zoom + e->lr;
+	e->x = (WIN_X / 5 * 2) + y * e->zoom + x * e->zoom + e->lr;
 	e->y = (WIN_Y / 5 * 2) + y * e->zoom - x * e->zoom - e->tab[y][x]
 		* e->height + e->ud;
-	 e->color = e->tab[y][x] * 0x3366ff / e->height_max + e->contrast;
+	 e->color = e->tab[y][x] * (0x3366ff / e->height_max) + e->contrast;
 	if (x == 0)
 	{
 		e->y_prev = e->y;
@@ -49,12 +46,13 @@ void		ft_iso(size_t x, size_t y, t_env *e)
 	e->x_prev = e->x;
 }
 
-void		ft_print(t_env *e)
+int			ft_print(t_env *e)
 {
 	size_t		x;
 	size_t		y;
 
 	y = 0;
+	mlx_clear_window(e->mlx, e->win);
 	while (y < e->cnt_line)
 	{
 		x = 0;
@@ -65,6 +63,8 @@ void		ft_print(t_env *e)
 		}
 		++y;
 	}
+	mlx_pixel_put(e->mlx, e->win, e->tmpx, e->tmpy, e->color);
+	return (0);
 }
 
 int		ft_key_settings(int keycode, t_env *e)
@@ -73,22 +73,18 @@ int		ft_key_settings(int keycode, t_env *e)
 		exit(0);
 	if (keycode == STAR)
 		ft_drawsettings(e);
-	if (keycode == KEY_PLUS)
-		e->zoom += 1;
-	if (keycode == KEY_MINUS)
-		e->zoom -= 1;
-	if (keycode == KEY_RIGHT)
-		e->lr += 10;
-	if (keycode == KEY_LEFT)
-		e->lr -= 10;
-	if (keycode == KEY_UP)
-		e->ud -= 10;
-	if (keycode == KEY_DOWN)
-		e->ud += 10;
+	if (keycode == KEY_PLUS || (keycode == KEY_MINUS && e->zoom > 1))
+		e->zoom += (keycode == KEY_MINUS ? -1 : 1);
+	if (keycode == KEY_RIGHT || keycode == KEY_LEFT)
+		e->lr += (keycode == KEY_LEFT ? -10 * e->zoom : 10 * e->zoom);
+	if (keycode == KEY_UP || keycode == KEY_DOWN)
+		e->ud += (keycode == KEY_UP ? -10 * e->zoom : 10 * e->zoom);
 	if (keycode == PAGE_UP && e->color != 0xFFFFFF)
 		e->contrast += 0x123456;
 	if (keycode == PAGE_DOWN && e->color >= 0x111111)
 		e->contrast -= 0x123456;
+	if (keycode == SLASH || keycode == EQUAL)
+		e->height += (keycode == SLASH ? -1 : 1);
 	mlx_clear_window(e->mlx, e->win);
 	ft_print(e);
 	return (0);

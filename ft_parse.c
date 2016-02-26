@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:27:10 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/23 11:53:01 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/24 15:14:18 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void		ft_parse2(t_env *e, char *file)
 	while (e->line[e->cnt_col])
 		++e->cnt_col;
 	e->height_max = ft_atoi(e->line[0]);
-	while (e->cnt_line  > 0)
+	while (e->cnt_line > 0)
 	{
 		e->tab[e->cnt_line - 1] = (int*)ft_memalloc(sizeof(int*) * e->cnt_col);
 		--e->cnt_line;
@@ -84,7 +84,7 @@ void		ft_parse(t_env *e, char *file)
 
 	nmbr_col = 0;
 	if ((e->fd = open(file, O_RDONLY)) <= 0)
-		ft_error("the open has failed");
+		ft_error("error : invalid file");
 	ft_parse2(e, file);
 	while (nmbr_col < e->cnt_col)
 	{
@@ -103,7 +103,7 @@ void		ft_parse(t_env *e, char *file)
 				e->height_max = e->tab[e->cnt_line][nmbr_col];
 		}
 		if (nmbr_col != e->cnt_col)
-			ft_error("invalid map");
+			ft_error("error : invalid map");
 	}
 	++e->cnt_line;
 	size_t		x;

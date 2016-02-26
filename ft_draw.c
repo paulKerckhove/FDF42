@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 15:42:06 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/23 11:17:47 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/25 13:20:39 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		ft_draw(int x2, int y2, t_env *e)
 	e->sx = e->x_prev < x2 ? 1 : -1;
 	e->sy = e->y_prev < y2 ? 1 : -1;
 	e->error = (e->dx > e->dy ? e->dx : -(e->dy)) / 2;
-	while (!(e->tmpy == y2 && e-> tmpx == x2))
+	while (!(e->tmpy == y2 && e->tmpx == x2))
 	{
 		mlx_pixel_put(e->mlx, e->win, e->tmpx, e->tmpy, e->color);
 		e->tmp_error = e->error;
@@ -36,4 +36,4 @@ void		ft_draw(int x2, int y2, t_env *e)
 			e->tmpy += e->sy;
 		}
 	}
-} 
+}

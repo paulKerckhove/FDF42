@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 14:04:26 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/25 17:00:45 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/26 16:54:28 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		ft_key_settings(int keycode, t_env *e)
 {
 	if (keycode == ESC)
 		exit(0);
-	if (keycode == STAR)
+	if (keycode == RESET)
 		ft_drawsettings(e);
 	if (keycode == KEY_PLUS || (keycode == KEY_MINUS && e->zoom > 1))
 		e->zoom += (keycode == KEY_MINUS ? -1 : 1);
@@ -83,25 +83,32 @@ int		ft_key_settings(int keycode, t_env *e)
 		e->contrast += 0x123456;
 	if (keycode == PAGE_DOWN && e->color >= 0x111111)
 		e->contrast -= 0x123456;
-	if (keycode == SLASH || keycode == EQUAL)
+	if (keycode == SLASH || keycode == STAR)
 		e->height += (keycode == SLASH ? -1 : 1);
 	mlx_clear_window(e->mlx, e->win);
 	ft_print(e);
+	ft_settings(*e);
 	return (0);
 }
 
 int		main(int argc, char **argv)
 {
 	t_env	e;
+	int		i_x;
+	int		i_y;
+
+	i_x = WIN_X * 2 / 5;
+	i_y = WIN_Y * 2 / 5;
+
 
 	if (argc == 2)
 	{
 		ft_parse(&e, argv[1]);
 		ft_drawsettings(&e);
-		ft_settings();
 		e.mlx = mlx_init();
 		e.win = mlx_new_window(e.mlx, WIN_X, WIN_Y, "mlx42");
-		ft_print(&e);
+		mlx_string_put(e.mlx, e.win, i_x, i_y, 0xccccff, WELCOME);
+		mlx_string_put(e.mlx, e.win, i_x + 16, i_y + 20, 0xccccff, START);
 		mlx_hook(e.win, KEYPRESS, KEYPRESSMASK, ft_key_settings, &e);
 		mlx_loop(e.mlx);
 	}

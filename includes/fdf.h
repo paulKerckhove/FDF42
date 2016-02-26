@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 14:31:15 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/25 16:59:04 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/02/26 15:54:39 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # define WIN_X 1920
 # define WIN_Y 1200
 
-# define WELCOME "Welcome to FDF by pkerckho"
-
 # define KEY_UP 126
 # define KEY_DOWN 125
 # define KEY_LEFT 123
@@ -26,10 +24,27 @@
 # define KEY_MINUS 78
 # define PAGE_UP 116
 # define PAGE_DOWN 121
-# define STAR 67
+# define RESET 71
 # define ESC 53
 # define SLASH 75
-# define EQUAL 81
+# define STAR 67
+
+# define WELCOME "Welcome to fdf by pkerckho"
+# define START "Press any key to start"
+
+# define I_SETINGS "               SETTINGS"
+# define I_KEY_UP "    move up       ||  up"
+# define I_KEY_DOWN "    move down     ||  down"
+# define I_KEY_LEFT "    move left     ||  left"
+# define I_KEY_RIGHT "    move right    ||  right"
+# define I_KEY_PLUS "    zoom in       ||  +"
+# define I_KEY_MINUS "    zoom out      ||  -"
+# define I_STAR "  increase height ||  *"
+# define I_SLASH "  decrease height ||  /"
+# define I_PAGE_UP "  epileptic mode  ||  page up"
+# define I_PAGE_DOWN "  epileptic mode  ||  page down"
+# define I_RESET "       reset      ||  clear"
+# define I_ESC "    exit program  ||  esc"
 
 # define KEYPRESS 2
 # define KEYRELEASE 3
@@ -76,7 +91,8 @@ int							ft_split_line(t_env *e);
 void						ft_parse2(t_env *e, char *file);
 void						ft_freeparse2(t_env *e);
 void						ft_draw(int x2, int y2, t_env *e);
-void						ft_settings(void);
+int							ft_key_settings(int keycode, t_env *e);
+void						ft_settings(t_env e);
 void						ft_create_color(int *colors);
 void						ft_color(void);
 #endif

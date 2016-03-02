@@ -6,15 +6,15 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 14:31:15 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/26 15:54:39 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/03/02 11:43:23 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# define WIN_X 1920
-# define WIN_Y 1200
+# define WIN_X 2560
+# define WIN_Y 1400
 
 # define KEY_UP 126
 # define KEY_DOWN 125
@@ -65,8 +65,8 @@ typedef struct				s_env
 	int						color;
 	void					*mlx;
 	void					*win;
-	size_t						cnt_col;
-	size_t						cnt_line;
+	size_t					cnt_col;
+	size_t					cnt_line;
 	int						**tab;
 	int						x_prev;
 	int						y_prev;
@@ -84,6 +84,11 @@ typedef struct				s_env
 	int						height;
 	int						height_max;
 	int						contrast;
+	void					*im;
+	void					*imc;
+	int						imlen;
+	int						bpp;
+	int						endi;
 }							t_env;
 
 void						ft_parse(t_env *e, char *file);
@@ -95,4 +100,5 @@ int							ft_key_settings(int keycode, t_env *e);
 void						ft_settings(t_env e);
 void						ft_create_color(int *colors);
 void						ft_color(void);
+void						ft_put_pixel(t_env *e, int x, int y, int color);
 #endif

@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 14:04:26 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/26 16:54:28 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/03/02 13:16:07 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ int			ft_print(t_env *e)
 	size_t		y;
 
 	y = 0;
+	mlx_destroy_image(e->mlx, e->im);
 	mlx_clear_window(e->mlx, e->win);
+	e->im = mlx_new_image(e->mlx, WIN_X, WIN_Y);
 	while (y < e->cnt_line)
 	{
 		x = 0;
@@ -63,7 +65,8 @@ int			ft_print(t_env *e)
 		}
 		++y;
 	}
-	mlx_pixel_put(e->mlx, e->win, e->tmpx, e->tmpy, e->color);
+	ft_put_pixel(e, e->tmpx, e->tmpy, e->color);
+	mlx_put_image_to_window(e->mlx, e->win, e->im, 0, 0);
 	return (0);
 }
 
@@ -99,14 +102,14 @@ int		main(int argc, char **argv)
 
 	i_x = WIN_X * 2 / 5;
 	i_y = WIN_Y * 2 / 5;
-
-
 	if (argc == 2)
 	{
 		ft_parse(&e, argv[1]);
 		ft_drawsettings(&e);
 		e.mlx = mlx_init();
 		e.win = mlx_new_window(e.mlx, WIN_X, WIN_Y, "mlx42");
+		e.im = mlx_new_image(e.mlx, WIN_X, WIN_Y);
+		e.imc = mlx_get_data_addr(e.im, &e.bpp, &e.imlen, &e.endi);
 		mlx_string_put(e.mlx, e.win, i_x, i_y, 0xccccff, WELCOME);
 		mlx_string_put(e.mlx, e.win, i_x + 16, i_y + 20, 0xccccff, START);
 		mlx_hook(e.win, KEYPRESS, KEYPRESSMASK, ft_key_settings, &e);

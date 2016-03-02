@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:27:10 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/02/24 15:14:18 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/03/02 11:40:19 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ void		ft_parse2(t_env *e, char *file)
 		++e->cnt_line;
 		len = ft_strlen(line);
 		free(line);
+		if (!len)
+			ft_error("error : invalid map");
 	}
-	if (e->cnt_line == 0 || len == 0)
+	if (e->cnt_line == 0)
 		ft_error("the read has failed");
 	e->tab = (int **)ft_memalloc(sizeof(int *) * e->cnt_line);
 	close(e->fd);
@@ -50,10 +52,7 @@ void		ft_parse2(t_env *e, char *file)
 		++e->cnt_col;
 	e->height_max = ft_atoi(e->line[0]);
 	while (e->cnt_line > 0)
-	{
-		e->tab[e->cnt_line - 1] = (int*)ft_memalloc(sizeof(int*) * e->cnt_col);
-		--e->cnt_line;
-	}
+		e->tab[--e->cnt_line] = (int*)ft_memalloc(sizeof(int*) * e->cnt_col);
 }
 
 void	ft_freeparse2(t_env *e)

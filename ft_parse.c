@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:27:10 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/03/02 11:40:19 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/03/03 16:03:20 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,20 +105,4 @@ void		ft_parse(t_env *e, char *file)
 			ft_error("error : invalid map");
 	}
 	++e->cnt_line;
-	size_t		x;
-	size_t		y;
-
-	y = 0;
-	while (y < e->cnt_line)
-	{
-		x = 0;
-		while (x < e->cnt_col)
-		{
-			ft_putnbr(e->tab[y][x]);
-			ft_putchar(' ');
-			++x;
-		}
-		ft_putchar('\n');
-		++y;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 14:04:26 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/03/02 13:16:07 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/03/03 15:48:36 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void		ft_iso(size_t x, size_t y, t_env *e)
 	e->x = (WIN_X / 5 * 2) + y * e->zoom + x * e->zoom + e->lr;
 	e->y = (WIN_Y / 5 * 2) + y * e->zoom - x * e->zoom - e->tab[y][x]
 		* e->height + e->ud;
-	 e->color = e->tab[y][x] * (0x3366ff / e->height_max) + e->contrast;
+	if (e->height_max == 0)
+		e->height_max = 1;
+	e->color = e->tab[y][x] * (0x3366ff / e->height_max) + e->contrast;
 	if (x == 0)
 	{
 		e->y_prev = e->y;
@@ -70,7 +72,7 @@ int			ft_print(t_env *e)
 	return (0);
 }
 
-int		ft_key_settings(int keycode, t_env *e)
+int			ft_key_settings(int keycode, t_env *e)
 {
 	if (keycode == ESC)
 		exit(0);
@@ -94,7 +96,7 @@ int		ft_key_settings(int keycode, t_env *e)
 	return (0);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_env	e;
 	int		i_x;

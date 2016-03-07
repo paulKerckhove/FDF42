@@ -6,7 +6,7 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:27:10 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/03/03 16:03:20 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/03/07 11:43:44 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		ft_parse2(t_env *e, char *file)
 		e->tab[--e->cnt_line] = (int*)ft_memalloc(sizeof(int*) * e->cnt_col);
 }
 
-void	ft_freeparse2(t_env *e)
+void		ft_freeparse2(t_env *e)
 {
 	int		i;
 
@@ -104,5 +104,4 @@ void		ft_parse(t_env *e, char *file)
 		if (nmbr_col != e->cnt_col)
 			ft_error("error : invalid map");
 	}
-	++e->cnt_line;
 }

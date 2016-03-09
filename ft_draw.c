@@ -6,11 +6,19 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 15:42:06 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/03/02 11:45:07 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/03/09 10:46:28 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/*
+** This function is kind of a copy of the original putpixel from the minilibx
+** but it includes the fact that it creates new images evry times we moove our
+** 42, so it displays it way more faster. The algorythme calculates the new
+** position of every pixels first, then saves it, destroy the old image and
+** recreates a new one from the new coordonates and displays it.
+*/
 
 void		ft_put_pixel(t_env *e, int x, int y, int color)
 {

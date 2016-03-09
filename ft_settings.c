@@ -6,11 +6,16 @@
 /*   By: pkerckho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 15:44:46 by pkerckho          #+#    #+#             */
-/*   Updated: 2016/03/02 11:48:23 by pkerckho         ###   ########.fr       */
+/*   Updated: 2016/03/09 10:49:20 by pkerckho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/*
+** This setting function is used to display our settings in the top-left
+** corner, i_y + (something + 16) is set for the space between our lines.
+*/
 
 void		ft_settings(t_env e)
 {
